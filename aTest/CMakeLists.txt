@@ -1,3 +1,4 @@
+
 cmake_minimum_required(VERSION 3.14)
 #project(Template VERSION 0.1.0)
 
@@ -16,7 +17,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(aTest aTest01.cpp)
+add_executable(aTest SortTest01.cpp)
 
 target_link_libraries(
   aTest LINK_PUBLIC gtest_main
@@ -26,7 +27,7 @@ target_link_libraries(
 )
 
 include(GoogleTest)
-gtest_add_tests(aTest "" aTest01.cpp)
+gtest_add_tests(aTest "" SortTest01.cpp)
 #gtest_discover_tests(aTest)
 
 #target_include_directories (InvTest PUBLIC "C://git//googletest//googletest//include")
