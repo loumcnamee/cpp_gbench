@@ -3,10 +3,9 @@
 
 #include <vector>
 #include <iostream>
+#include <algorithm>
 #include "SortStuff.h"
 
-
-std::vector<int> in_data = {8, 9, 3, 1, 0, 23, 3, 5, 7, 2, 11, 31, -1, -4, 4}; // 15 elements
 
 void printVector(std::vector<int> v) {
   for (std::vector<int>::iterator it = v.begin(); it != v.end(); ++it)
@@ -15,6 +14,7 @@ void printVector(std::vector<int> v) {
 }
 
 static void BM_SlowSort(benchmark::State& state) {
+  std::vector<int> in_data = {8, 9, 3, 1, 0, 23, 3, 5, 7, 2, 11, 31, -1, -4, 4}; // 15 elements
   SortStuff sorter;
   for (auto _ : state)
     sorter.SlowSort(in_data.data(), 0, in_data.size());
@@ -22,13 +22,13 @@ static void BM_SlowSort(benchmark::State& state) {
 // Register the function as a benchmark
 BENCHMARK(BM_SlowSort);
 
-// Define another benchmark
-static void BM_StringCopy(benchmark::State& state) {
-  std::string x = "hello";
+// Benchmark the std::sort algorithms for comparison
+static void BM_StdSort(benchmark::State& state) {
+  std::vector<int> in_data = {8, 9, 3, 1, 0, 23, 3, 5, 7, 2, 11, 31, -1, -4, 4}; // 15 elements 
   for (auto _ : state)
-    std::string copy(x);
+    std::sort(in_data.begin(), in_data.end());
 }
-BENCHMARK(BM_StringCopy);
+BENCHMARK(BM_StdSort);
 
 BENCHMARK_MAIN();
 
